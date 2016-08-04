@@ -1,8 +1,6 @@
-// enable source-maps in node
-import 'source-map-support/register';
-// import soundworks (server-side) and experience
+import 'source-map-support/register'; // enable sourcemaps in node
 import * as soundworks from 'soundworks/server';
-import SoundfieldExperience from './SoundfieldExperience';
+import PlayerExperience from './PlayerExperience';
 import defaultConfig from './config/default';
 
 let config = null;
@@ -15,7 +13,6 @@ switch(process.env.ENV) {
 
 // configure express environment ('production' enables cache systems)
 process.env.NODE_ENV = config.env;
-
 // initialize application with configuration options
 soundworks.server.init(config);
 
@@ -24,16 +21,22 @@ soundworks.server.setClientConfigDefinition((clientType, config, httpRequest) =>
   return {
     clientType: clientType,
     env: config.env,
-    socketIO: config.socketIO,
     appName: config.appName,
+    socketIO: config.socketIO,
     version: config.version,
     defaultType: config.defaultClient,
     assetsDomain: config.assetsDomain,
   };
 });
 
-// create the common server experience for both the soloists and the players
-const soundfieldExperience = new SoundfieldExperience(['player', 'soloist']);
+// create the experience
+// activities must be mapped to client types:
+// - the `'player'` clients (who take part in the scenario by connecting to the
+//   server through the root url) need to communicate with the `checkin` (see
+// `src/server/playerExperience.js`) and the server side `playerExperience`.
+// - we could also map activities to additional client types (thus defining a
+//   route (url) of the following form: `/${clientType}`)
+const experience = new PlayerExperience('player');
 
-// start the application
+// start application
 soundworks.server.start();

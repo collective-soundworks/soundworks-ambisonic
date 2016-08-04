@@ -1,11 +1,12 @@
 {
-  "name": "soundfield",
+  "name": "soundworks-ambisonic",
   "authors": [
     "Benjamin Matuszewski",
     "Sébastien Robaszkiewicz",
-    "Norbert Schnell"
+    "Norbert Schnell",
+    "David Poirier-Quinot"
   ],
-  "description": "Soundfield - Soundworks example application.",
+  "description": "Example use of the web-audio-ambisonic library in Soundworks.",
   "version": "1.1.1",
   "license": "BSD-3-Clause",
   "scripts": {
@@ -17,13 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/collective-soundworks/soundworks-soundfield"
+    "url": "https://github.com/collective-soundworks/soundworks-ambisonic.git"
   },
   "dependencies": {
     "babel-runtime": "^6.6.1",
     "debug": "^2.1.2",
     "soundworks": "collective-soundworks/soundworks.git#v1.1.1",
-    "source-map-support": "^0.4.0"
+    "source-map-support": "^0.4.0",
+    "web-audio-ambisonic": "polarch/JSAmbisonics#safari"
   },
   "devDependencies": {
     "babel-core": "^6.6.5",
