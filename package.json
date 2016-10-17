@@ -25,7 +25,7 @@
     "debug": "^2.1.2",
     "soundworks": "collective-soundworks/soundworks.git#v1.1.1",
     "source-map-support": "^0.4.0",
-    "web-audio-ambisonic": "polarch/JSAmbisonics#safari"
+    "ambisonic": "polarch/JSAmbisonics.git#umd-or-min-bundle"
   },
   "devDependencies": {
     "babel-core": "^6.6.5",

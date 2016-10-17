@@ -1,4 +1,4 @@
-import * as webAudioAmbisonic from 'web-audio-ambisonic';
+import * as ambisonics from 'ambisonics';
 import * as soundworks from 'soundworks/client';
 
 const audioContext = soundworks.audioContext;
@@ -8,8 +8,8 @@ export default class SpatSourcesHandler {
 
         // create ambisonic encoder / decoder
         this.ambisonicOrder = 3;
-        this.encoder = new webAudioAmbisonic.monoEncoder(audioContext, this.ambisonicOrder);
-        this.decoder = new webAudioAmbisonic.binDecoder(audioContext, this.ambisonicOrder);
+        this.encoder = new ambisonics.monoEncoder(audioContext, this.ambisonicOrder);
+        this.decoder = new ambisonics.binDecoder(audioContext, this.ambisonicOrder);
         this.gainOut = audioContext.createGain();
         this.gainOut.gain.value = 1.0;
 
@@ -20,7 +20,7 @@ export default class SpatSourcesHandler {
 
         // load HOA to bianural filters in decoder
         var irUrl = "IRs/HOA3_filters_virtual.wav";
-        var loader_filters = new webAudioAmbisonic.HOAloader(audioContext, this.ambisonicOrder, irUrl, (buffer) => { this.decoder.updateFilters(buffer); } );
+        var loader_filters = new ambisonics.HOAloader(audioContext, this.ambisonicOrder, irUrl, (buffer) => { this.decoder.updateFilters(buffer); } );
         loader_filters.load();
 
         // add constant source
